@@ -6,6 +6,7 @@ const customMiddleware = require('../middleware/custom');
 
 const UserController = require('../controllers/user.controller');
 const TaskController = require('../controllers/task.controller');
+const TimeLogController = require('../controllers/timelog.controller');
 
 router.get('/api', (req, res, next) => {
   res.json(
@@ -28,6 +29,12 @@ router.post(  '/tasks', TaskController.create);
 router.get(   '/tasks/:taskId', customMiddleware.task, TaskController.get);
 router.delete('/tasks/:taskId', customMiddleware.task, TaskController.delete);
 router.put(   '/tasks/:taskId', customMiddleware.task, TaskController.update);
+
+router.get(   '/timeLogs', TimeLogController.getAll);
+router.post(  '/timeLogs', TimeLogController.create);
+router.get(   '/timeLogs/:timeLogId', customMiddleware.timeLog, TimeLogController.get);
+router.delete('/timeLogs/:timeLogId', customMiddleware.timeLog, TimeLogController.delete);
+router.put(   '/timeLogs/:timeLogId', customMiddleware.timeLog, TimeLogController.update);
 /* eslint-enable */
 
 module.exports = router;
