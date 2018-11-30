@@ -14,6 +14,7 @@
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "lodash": "^4.17.11",
+    "moment": "^2.22.2",
     "morgan": "^1.9.1",
     "mysql2": "^1.6.4",
     "parse-error": "^0.2.0",

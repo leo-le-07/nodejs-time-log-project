@@ -8,6 +8,7 @@ const UserController = require('../controllers/user.controller');
 const TaskController = require('../controllers/task.controller');
 const TimeLogController = require('../controllers/timelog.controller');
 const ProjectController = require('../controllers/project.controller');
+const ReportController = require('../controllers/report.controller');
 
 router.get('/api', (req, res, next) => {
   res.json(
@@ -38,6 +39,8 @@ router.delete('/timeLogs/:timeLogId', customMiddleware.timeLog, TimeLogControlle
 router.put(   '/timeLogs/:timeLogId', customMiddleware.timeLog, TimeLogController.update);
 
 router.get(   '/projects', ProjectController.getAll);
+
+router.post(   '/reports/tasks', ReportController.getTasks);
 /* eslint-enable */
 
 module.exports = router;

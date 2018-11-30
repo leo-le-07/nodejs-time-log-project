@@ -1,4 +1,4 @@
-const _ = require('lodash');
+const isEmpty = require('lodash/isEmpty');
 
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
   };
 
   User.beforeSave(async (user, options) => {
-    if (_.isEmpty(user.role)) {
+    if (isEmpty(user.role)) {
       user.role = 'normal';
     }
   });
