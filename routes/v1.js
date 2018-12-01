@@ -1,6 +1,8 @@
 const express = require('express');
 
 const router = express.Router();
+const passport = require('passport');
+require('../passport');
 
 const customMiddleware = require('../middleware/custom');
 
@@ -9,6 +11,7 @@ const TaskController = require('../controllers/task.controller');
 const TimeLogController = require('../controllers/timelog.controller');
 const ProjectController = require('../controllers/project.controller');
 const ReportController = require('../controllers/report.controller');
+const AuthController = require('../controllers/auth.controller');
 
 router.get('/api', (req, res, next) => {
   res.json(
@@ -23,8 +26,10 @@ router.get('/api', (req, res, next) => {
 });
 
 /* eslint-disable */
-router.get(   '/users', UserController.getAll);
-router.post(  '/users', UserController.create);
+router.post(   '/login', AuthController.authenticate);
+
+router.get(   '/users', passport.authenticate('jwt', { session: false }), UserController.getAll);
+router.post(  '/users', passport.authenticate('jwt', { session: false }), UserController.create);
 
 router.get(   '/tasks', TaskController.getAll);
 router.post(  '/tasks', TaskController.create);
