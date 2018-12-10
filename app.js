@@ -20,11 +20,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 const models = require('./models');
 
 // Sync database
-models.sequelize.sync().then(() => {
-  console.log('Nice~ Database looks fine');
-}).catch((error) => {
-  console.log(error, 'Something went wrong with the Database Update!');
-});
+if (process.env.NODE_ENV === 'dev') {
+  models.sequelize.sync().then(() => {
+    console.log('Nice~ Database looks fine');
+  }).catch((error) => {
+    console.log(error, 'Something went wrong with the Database Update!');
+  });
+}
 
 // Require our routes into the application
 app.use('/v1', v1);
@@ -36,6 +38,9 @@ app.get('*', (req, res) => res.status(200).send({
 const port = parseInt(process.env.PORT, 10) || 8000;
 app.set('port', port);
 const server = http.createServer(app);
-server.listen(port);
+
+if (process.env.NODE_ENV !== 'test') {
+  server.listen(port);
+}
 
 module.exports = app;

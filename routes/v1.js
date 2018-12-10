@@ -26,7 +26,7 @@ router.get('/api', (req, res, next) => {
 });
 
 /* eslint-disable */
-router.post(   '/login', AuthController.authenticate);
+router.post(  '/login', AuthController.authenticate);
 
 router.get(   '/users', passport.authenticate('jwt', { session: false }), UserController.getAll);
 router.post(  '/users', passport.authenticate('jwt', { session: false }), UserController.create);
@@ -45,7 +45,7 @@ router.put(   '/timeLogs/:timeLogId', customMiddleware.timeLog, TimeLogControlle
 
 router.get(   '/projects', ProjectController.getAll);
 
-router.post(   '/reports/tasks', ReportController.getTasks);
+router.post(  '/reports/tasks', ReportController.getTasks);
 /* eslint-enable */
 
 module.exports = router;
