@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "ndb nodemon ./app.js",
+    "start": "nodemon ./app.js",
     "pretest": "NODE_ENV=test ./node_modules/.bin/sequelize db:create && ./node_modules/.bin/sequelize db:migrate ",
     "test": "NODE_ENV=test jest --testPathPattern='./tests/.*\\.test\\.js$' --detectOpenHandles --runInBand --forceExit"
   },
