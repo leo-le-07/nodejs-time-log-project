@@ -3,14 +3,14 @@
     "username": "root",
     "password": "password",
     "database": "database_development",
-    "host": "127.0.0.1",
+    "host": "mysql",
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
     "password": "password",
     "database": "time-log-project-test",
-    "host": "127.0.0.1",
+    "host": "localhost",
     "dialect": "mysql",
     "logging": false
   },
@@ -18,7 +18,7 @@
     "username": "root",
     "password": null,
     "database": "database_production",
-    "host": "127.0.0.1",
+    "host": "localhost",
     "dialect": "mysql"
   }
 }

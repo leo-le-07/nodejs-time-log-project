@@ -35,12 +35,14 @@ app.use('/v1', v1);
 app.get('*', (req, res) => res.status(200).send({
   message: 'Welcome to the beginning of nothingness.!',
 }));
+const host = '0.0.0.0';
 const port = parseInt(process.env.PORT, 10) || 8000;
 app.set('port', port);
 const server = http.createServer(app);
 
 if (process.env.NODE_ENV !== 'test') {
-  server.listen(port);
+  server.listen(port, host);
+  console.log(`Running on http://${host}:${port}`);
 }
 
 module.exports = app;
