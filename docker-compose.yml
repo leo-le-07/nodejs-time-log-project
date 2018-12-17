@@ -1,24 +1,40 @@
 version: '3'
 
 services:
+  dev:
+    build: .
+    container_name: time_log_dev
+    ports:
+      - 8000:3000
+    env_file: .env
+    command: npm run dev
+    volumes:
+      - .:/user/src/app
+    depends_on:
+      - mysql
+  test:
+    build:
+      dockerfile: Dockerfile-test
+      context: .
+    env_file: .env-test
+    restart: always
+    depends_on:
+      - mysql_test
   mysql:
     image: mysql:5.7.24
+    container_name: time_log_project_mysql
     environment:
-      MYSQL_DATABASE: database_development
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_USER: root
+      - MYSQL_DATABASE
+      - MYSQL_ROOT_PASSWORD
+      - MYSQL_USER
     command: --character-set-server=utf8
     restart: always
     volumes:
       - db:/var/lib/mysql
-      - ./db-setup/db-dev.sql:/docker-entrypoint-initdb.d/sql-setup.sql
-  app:
-    build: .
-    ports:
-      - 8000:3000
-    environment:
-      PORT: 3000
-    depends_on:
-      - mysql
+  mysql_test:
+    image: mysql:5.7.24
+    container_name: time_log_project_mysql_test
+    env_file: .env-test
+    command: --character-set-server=utf8
 volumes:
   db:

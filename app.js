@@ -1,3 +1,4 @@
+const { isTest } = require('./services/environment.service');
 const express = require('express');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
@@ -35,12 +36,12 @@ app.use('/v1', v1);
 app.get('*', (req, res) => res.status(200).send({
   message: 'Welcome to the beginning of nothingness.!',
 }));
-const host = '0.0.0.0';
-const port = parseInt(process.env.PORT, 10) || 8000;
+const host = process.env.NODE_HOST || '0.0.0.0';
+const port = parseInt(process.env.NODE_PORT, 10) || 8000;
 app.set('port', port);
 const server = http.createServer(app);
 
-if (process.env.NODE_ENV !== 'test') {
+if (!isTest()) {
   server.listen(port, host);
   console.log(`Running on http://${host}:${port}`);
 }

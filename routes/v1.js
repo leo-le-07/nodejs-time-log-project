@@ -13,7 +13,7 @@ const ProjectController = require('../controllers/project.controller');
 const ReportController = require('../controllers/report.controller');
 const AuthController = require('../controllers/auth.controller');
 
-router.get('/api', (req, res, next) => {
+router.get('/api', (req, res) => {
   res.json(
     {
       status: 'success',
@@ -22,7 +22,6 @@ router.get('/api', (req, res, next) => {
         { version_number: 'v1.0.0' },
     },
   );
-  return next();
 });
 
 /* eslint-disable */

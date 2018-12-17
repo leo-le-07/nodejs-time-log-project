@@ -1,0 +1,12 @@
+FROM node:11.4.0
+
+RUN mkdir -p /usr/src/app
+WORKDIR /user/src/app
+
+COPY package.json ./
+RUN npm install
+RUN npm install -g jest sequelize-cli
+
+COPY . .
+
+CMD ["npm", "run", "test"]
